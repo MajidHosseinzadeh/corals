@@ -1,4 +1,5 @@
 import Input from '@/components/common/Input'
+import LeftSide from '@/components/uncommon/register_component/LeftSide'
 import React from 'react'
 
 
@@ -7,9 +8,7 @@ import React from 'react'
 const index = () => {
   return (
     <div>
-        <br/>
-        <br/>
-        <Input/>
+        <LeftSide/>
     </div>
   )
 }
