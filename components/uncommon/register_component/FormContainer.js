@@ -7,18 +7,19 @@ import { useFormik } from 'formik'
 import { schema } from '@/schemas'
 
 const LeftContainer = styled.div`
-    width: 24rem;
-    max-width: 24rem;
+    width: 50vw;
+    height: 50rem;
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
+    background-color: black
 `
 
 const TitleFlex = styled.div`
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
 `
 
@@ -28,8 +29,8 @@ const Welcome = styled.h1`
 
 `
 const Create = styled.h3`
-    font-size: 14px;
-    color: #070707;
+    font-size: 12px;
+    color: white;
 `
 
 const InputFlex = styled.div`
@@ -67,17 +68,18 @@ const Cont = styled.div`
 `;
 
 const Error = styled.p`
-  color: red;
-  font-size: 14px;
+  color: #fecf6d;
+  font-size: 10px;
 `
 
 
-const onSubmit = () => {
+const onSubmit = async (actions) => {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    actions.resetForm();
+};
 
-}
+const FormContainer = () => {
 
-
-const LeftSide = () => {
     const [labelVisibility1, setLabelVisibility1] = useState(false);
     const [labelVisibility2, setLabelVisibility2] = useState(false);
     const [labelVisibility3, setLabelVisibility3] = useState(false);
@@ -100,7 +102,7 @@ const LeftSide = () => {
 
 
 
-    const { handleBlur, handleChange, values, handleSubmit, errors, touched } = useFormik({
+    const { handleBlur, handleChange, values, handleSubmit, errors, touched, isSubmitting } = useFormik({
         initialValues: {
             username: "",
             email: "",
@@ -149,7 +151,7 @@ const LeftSide = () => {
                             onInput={handleInput2}
                             className={errors.email && touched.email ? "input-error" : ""}
                         />
-                        {errors.username && touched.username && <Error>{errors.email}</Error>}
+                        {errors.email && touched.email && <Error>{errors.email}</Error>}
                         <InputLabel htmlFor="email" isVisible={labelVisibility2}>Email</InputLabel>
                     </InputContainer>
                     <InputContainer>
@@ -162,7 +164,7 @@ const LeftSide = () => {
                             className={errors.password && touched.password ? "input-error" : ""}
                             id="password"
                         />
-                        {errors.username && touched.username && <Error>{errors.password}</Error>}
+                        {errors.password && touched.password && <Error>{errors.password}</Error>}
                         <InputLabel htmlFor="password" isVisible={labelVisibility3}>Password</InputLabel>
                     </InputContainer>
                     <InputContainer>
@@ -173,15 +175,15 @@ const LeftSide = () => {
                             type="password"
                             onInput={handleInput4}
                             className={errors.confirmPassword && touched.confirmPassword ? "input-error" : ""}
-                            id="cpassword"
+                            id="confirmPassword"
                         />
-                        {errors.username && touched.username && <Error>{errors.confirmPassword}</Error>}
-                        <InputLabel htmlFor="cpassword" isVisible={labelVisibility4}>Confirm Password</InputLabel>
+                        {errors.confirmPassword && touched.confirmPassword && <Error>{errors.confirmPassword}</Error>}
+                        <InputLabel htmlFor="confirmPassword" isVisible={labelVisibility4}>Confirm Password</InputLabel>
                     </InputContainer>
                 </InputFlex>
-                <Button name='CREATE ACCOUNT' size='18rem' font="12px" background="#E1BEA5" color="#070707" border="#E1BEA5" hoverb="white" hoverc="#070707" hoverborder="#070707" />
+                <Button disabled={isSubmitting} name='CREATE ACCOUNT' size='14rem' font="12px" background="#E1BEA5" color="#070707" border="#E1BEA5" hoverb="white" hoverc="#070707" hoverborder="#070707" />
                 <Cont>
-                    <Button type='submit' id="buttn" name='CREATE ACCOUNT' size='18rem' font="12px" background="#E1BEA5" color="#070707" border="#E1BEA5" hoverb="white" hoverc="#070707" hoverborder="#070707" />
+                    <Button disabled={isSubmitting} type='submit' id="buttn" name='CREATE ACCOUNT' size='14rem' font="12px" background="#4091d7" color="#070707" border="#4091d7" hoverb="white" hoverc="#070707" hoverborder="#070707" />
                     <Labl htmlFor='buttn'>
                         <Google />
                     </Labl>
@@ -191,4 +193,4 @@ const LeftSide = () => {
     )
 }
 
-export default LeftSide
+export default FormContainer

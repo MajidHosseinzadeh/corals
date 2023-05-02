@@ -1,15 +1,22 @@
-import Input from '@/components/common/Input'
-import LeftSide from '@/components/uncommon/register_component/LeftSide'
+import FormContainer from '@/components/uncommon/register_component/FormContainer'
+import RightSide from '@/components/uncommon/register_component/RightSide'
 import React from 'react'
+import styled from 'styled-components'
 
-
+const Register = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-directions: row;
+`
 
 
 const index = () => {
   return (
-    <div>
-        <LeftSide/>
-    </div>
+    <Register>
+        <FormContainer/>
+        <RightSide/>
+    </Register>
   )
 }
 

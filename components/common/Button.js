@@ -40,6 +40,12 @@ export const Button = (props) => {
         box-shadow: none;
         transform: translateY(0);
     }
+    
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
     `
     return (
         <SButton>{props.name}</SButton>
