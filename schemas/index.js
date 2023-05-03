@@ -25,3 +25,16 @@ export const schema = yup.object().shape({
     .oneOf([yup.ref("password"), null], "Passwords must match")
     .required("Required"),
 })
+
+export const loginSchema = yup.object().shape({
+    username: yup
+    .string()
+    .min(3)
+    .required("Requierd"),
+
+    password: yup
+    .string()
+    .min(8)
+    .required("Required"),
+
+})

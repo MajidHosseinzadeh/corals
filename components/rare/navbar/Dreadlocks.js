@@ -69,7 +69,6 @@ const Dreadlocks = () => {
                 </ButtonContainer>
             </Right>
             <Image className='img' src='/cosmetic.jpg' width={820} height={1080} />
-            
         </Sec>
     )
 }

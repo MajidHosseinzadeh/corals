@@ -33,7 +33,7 @@ const Create = styled.h3`
     color: white;
 `
 
-const InputFlex = styled.div`
+export const InputFlex = styled.div`
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
@@ -41,7 +41,7 @@ const InputFlex = styled.div`
     margin-top: 2rem;
 `
 
-const Form = styled.form`
+export const Form = styled.form`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -67,7 +67,7 @@ const Cont = styled.div`
   }
 `;
 
-const Error = styled.p`
+export const Error = styled.p`
   color: #fecf6d;
   font-size: 10px;
 `
@@ -181,9 +181,9 @@ const FormContainer = () => {
                         <InputLabel htmlFor="confirmPassword" isVisible={labelVisibility4}>Confirm Password</InputLabel>
                     </InputContainer>
                 </InputFlex>
-                <Button disabled={isSubmitting} name='CREATE ACCOUNT' size='14rem' font="12px" background="#E1BEA5" color="#070707" border="#E1BEA5" hoverb="white" hoverc="#070707" hoverborder="#070707" />
+                <Button disabled={isSubmitting} type="submit" name='CREATE ACCOUNT' size='14rem' font="12px" background="#E1BEA5" color="#070707" border="#E1BEA5" hoverb="white" hoverc="#070707" hoverborder="#070707" />
                 <Cont>
-                    <Button disabled={isSubmitting} type='submit' id="buttn" name='CREATE ACCOUNT' size='14rem' font="12px" background="#4091d7" color="#070707" border="#4091d7" hoverb="white" hoverc="#070707" hoverborder="#070707" />
+                    <Button disabled={isSubmitting} id="buttn" name='CREATE ACCOUNT' size='14rem' font="12px" background="#4091d7" color="#070707" border="#4091d7" hoverb="white" hoverc="#070707" hoverborder="#070707" />
                     <Labl htmlFor='buttn'>
                         <Google />
                     </Labl>
