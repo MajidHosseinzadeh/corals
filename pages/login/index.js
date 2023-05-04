@@ -103,7 +103,7 @@ const index = () => {
                     </InputContainer>
                 </InputFlex>
                 <Button type="submit" disabled={isSubmitting} name='Login' size='14rem' font="12px" background="#E1BEA5" color="#070707" border="#E1BEA5" hoverb="white" hoverc="#070707" hoverborder="#070707" />
-                <SLink href="/register" margin="20px 0px 0px 0px">
+                <SLink href="/forgot" margin="20px 0px 0px 0px">
                         forgot password ?
                 </SLink>
             </LoginForm>
