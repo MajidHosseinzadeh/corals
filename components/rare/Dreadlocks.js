@@ -68,7 +68,7 @@ const Dreadlocks = () => {
                     <Button className='butt' name='Book Now' font="18px" size="8rem" background="#E1BEA5" color="#070707" border="#E1BEA5" hoverb="white" hoverc="#070707" hoverborder="#070707" />
                 </ButtonContainer>
             </Right>
-            <Image className='img' src='/cosmetic.jpg' width={820} height={1080} />
+            <Image alt='s' className='img' src='/cosmetic.jpg' width={820} height={1080} />
         </Sec>
     )
 }

@@ -39,19 +39,26 @@ const ProductImage = styled(Image)`
   width: 10rem;
   height: 10rem;
   border-radius: 50%;
+  transition: all .8s ease;
+  &:hover{
+    transform: scale(1.2, 1.2);
+    opacity: 0.8;
+  }
 `;
 
 const ProductPrice = styled.span`
-  margin-top: 1rem;
+  margin-top: 2rem;
   font-size: 1rem;
   font-weight: bold;
   color: white;
 `;
 
 const ArrowLeft = styled(AiOutlineArrowLeft)`
-    color: white;
-    width: 25px;
-    height: 25px;
+    background-color: white;
+    color: black;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
     position: absolute;
     z-index: 99;
     top: 0;
@@ -61,9 +68,11 @@ const ArrowLeft = styled(AiOutlineArrowLeft)`
     left: 0;
 `
 const ArrowRight = styled(AiOutlineArrowRight)`
-    color: white;
-    width: 25px;
-    height: 25px;
+    background-color: white;
+    color: black;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
     position: absolute;
     z-index: 99;
     top: 0;
@@ -74,98 +83,25 @@ const ArrowRight = styled(AiOutlineArrowRight)`
 `
 
 const items = [
-  {
-    id: 1,
-    src: "/footer.jpg",
-    width: 200,
-    height: 200,
-    price: 10,
-  },
-  {
-    id: 2,
-    src: "/footer.jpg",
-    width: 200,
-    height: 200,
-    price: 20,
-  },
-  {
-    id: 3,
-    src: "/footer.jpg",
-    width: 200,
-    height: 200,
-    price: 30,
-  },
-  {
-    id: 4,
-    src: "/footer.jpg",
-    width: 200,
-    height: 200,
-    price: 30,
-  },
-  {
-    id: 5,
-    src: "/footer.jpg",
-    width: 200,
-    height: 200,
-    price: 30,
-  },
-  {
-    id: 6,
-    src: "/footer.jpg",
-    width: 200,
-    height: 200,
-    price: 30,
-  },
-  {
-    id: 12,
-    src: "/footer.jpg",
-    width: 200,
-    height: 200,
-    price: 30,
-  },
-  {
-    id: 7,
-    src: "/footer.jpg",
-    width: 200,
-    height: 200,
-    price: 30,
-  },
-  {
-    id: 8,
-    src: "/footer.jpg",
-    width: 200,
-    height: 200,
-    price: 30,
-  },
-  {
-    id: 9,
-    src: "/footer.jpg",
-    width: 200,
-    height: 200,
-    price: 30,
-  },
-  {
-    id: 10,
-    src: "/footer.jpg",
-    width: 200,
-    height: 200,
-    price: 900,
-  },
-
-  {
-    id: 11,
-    src: "/footer.jpg",
-    width: 200,
-    height: 200,
-    price: 1000,
-  },
+  { id: 1, src: "/footer.jpg", width: 200, height: 200, price: 1000, },
+  { id: 2, src: "/footer.jpg", width: 200, height: 200, price: 1000, },
+  { id: 3, src: "/footer.jpg", width: 200, height: 200, price: 1000, },
+  { id: 4, src: "/footer.jpg", width: 200, height: 200, price: 1000, },
+  { id: 5, src: "/footer.jpg", width: 200, height: 200, price: 1000, },
+  { id: 6, src: "/footer.jpg", width: 200, height: 200, price: 1000, },
+  { id: 7, src: "/footer.jpg", width: 200, height: 200, price: 1000, },
+  { id: 8, src: "/footer.jpg", width: 200, height: 200, price: 1000, },
+  { id: 9, src: "/footer.jpg", width: 200, height: 200, price: 1000, },
+  { id: 10, src: "/footer.jpg", width: 200, height: 200, price: 1000, },
+  { id: 11, src: "/footer.jpg", width: 200, height: 200, price: 1000, },
+  { id: 12, src: "/footer.jpg", width: 200, height: 200, price: 1000, },
 
 
 ];
 
 const Cart = () => {
   const [isMoving, setIsMoving] = useState(false);
-  const [slideNumber, setSlideNumber] = useState(0);
+  const [slideNumber, setSlideNumber] = useState(-1);
 
   const listRef = useRef();
 
@@ -185,7 +121,7 @@ const Cart = () => {
     }
   };
 
-  function set(){
+  function set() {
     setIsMoving(false);
   }
 
@@ -195,9 +131,9 @@ const Cart = () => {
       <Wrapper >
         <ArrowLeft onClick={() => handleClick("left")} />
         <Container ref={listRef}>
-          {items.map((item, index) => (
+          {items.map((item) => (
             <ProductCard key={item.id}>
-              <ProductImage alt="" src={item.src} width={item.width} height={item.height} />
+              <ProductImage alt="alt" src={item.src} width={item.width} height={item.height} />
               <ProductPrice>{item.price}</ProductPrice>
             </ProductCard>
           ))}
