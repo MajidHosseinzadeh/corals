@@ -113,7 +113,7 @@ const Cart = () => {
       listRef.current.style.transform = `translateX(${256 + distance}px)`;
       setTimeout(set, 1000);
     }
-    if (direction === "right" && slideNumber < 6 && !isMoving) {
+    if (direction === "right" && slideNumber < 5 && !isMoving) {
       setIsMoving(true);
       setSlideNumber(slideNumber + 1);
       listRef.current.style.transform = `translateX(${-256 + distance}px)`;
