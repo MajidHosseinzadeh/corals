@@ -42,9 +42,7 @@ const ButtonContainer = styled.div`
     display: flex;
     align-items: center;
     flex-decoration: column;
-    & .butt{
 
-    }
 `
 
 

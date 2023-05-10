@@ -3,6 +3,8 @@ import styled from 'styled-components'
 
 export const Button = (props) => {
     const SButton = styled.button`
+        @import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@200&display=swap');
+
         display: flex;
         justify-content: center;
         width: ${props.size};
@@ -13,7 +15,7 @@ export const Button = (props) => {
         box-sizing: border-box;
         color: ${props.color};
         cursor: pointer;
-        font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+        font-family: 'Urbanist', sans-serif;
         font-size: ${props.font};
         font-weight: 600;
         line-height: normal;
