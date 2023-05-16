@@ -4,8 +4,8 @@ import { RiEdit2Line } from 'react-icons/ri'
 import { Typography } from '@/components/common/Typography'
 import { Button } from '@/components/common/Button'
 
-const BaseInfoFlex = styled.div`
-    width: 30%;    
+export const BaseInfoFlex = styled.div`
+    width: ${({ width }) => width || '30%'};   
     height: 100%;
     display: flex;
     align-items: flex-start;
@@ -72,7 +72,7 @@ const ButtonLi = styled.li`
 
 const Profile = () => {
     return (
-        <BaseInfoFlex border='3px white solid'>
+        <BaseInfoFlex border='3px white solid' width='30%'>
             <BaseInfoEditFlex>
                 <BaseInfoFlex>
                     <Typography color='white' fontSize='18px' margin='10px 0px'>
