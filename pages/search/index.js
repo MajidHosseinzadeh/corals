@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { InputContainer, InputField } from '@/components/common/Input'
 import {ProductPrice } from '@/components/uncommon/profile_components/Orders';
 
-const SButton = styled.button`
+export const SButton = styled.button`
     @import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@200&display=swap');
     
     display: flex;
