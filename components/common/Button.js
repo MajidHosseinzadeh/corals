@@ -4,7 +4,7 @@ import styled from 'styled-components'
 export const Button = (props) => {
     const SButton = styled.button`
         @import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@200&display=swap');
-
+        
         display: flex;
         justify-content: center;
         width: ${props.size};

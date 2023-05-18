@@ -12,7 +12,7 @@ const MyOrders = styled.div`
   margin-top: 30px;
 `
 
-const CartContainer = styled.div`
+export const CartContainer = styled.div`
   width: 100%;
   display: flex;
   overflow-x: scroll;
@@ -21,7 +21,7 @@ const CartContainer = styled.div`
   justify-content: center;
 `;
 
-const ProductCard = styled.div`
+export const ProductCard = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -36,7 +36,7 @@ const ProductImage = styled.img`
   border-radius: 50%;
 `;
 
-const ProductPrice = styled.span`
+export const ProductPrice = styled.span`
   margin-top: 0.5rem;
   font-size: 1rem;
   font-weight: bold;
