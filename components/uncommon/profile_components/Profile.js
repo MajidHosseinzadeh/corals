@@ -76,10 +76,10 @@ const Profile = () => {
             <BaseInfoEditFlex>
                 <BaseInfoFlex>
                     <Typography color='white' fontSize='18px' margin='10px 0px'>
-                        Alireza Hamedi
+                        Majid Hosseinzadeh
                     </Typography>
                     <Typography color='white' fontSize='12px' margin='10px 0px'>
-                        alireza19126@gmail.com
+                        majidhzdh@gmail.com
                     </Typography>
                 </BaseInfoFlex>
                 <EditIcon />

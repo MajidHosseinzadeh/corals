@@ -8,6 +8,7 @@ import { useFormik } from 'formik';
 import Image from 'next/image';
 import React, { useState } from 'react'
 import styled from 'styled-components';
+import { date } from 'yup';
 
 const LoginPage = styled.div`
   width: 50vw;
@@ -42,6 +43,17 @@ export const LoginForm = styled.form`
 
 const onSubmit = async (actions) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+             username: 'majidhzdh', 
+             password: 'majid@123'
+            })
+    };
+    fetch('http://localhost:8000/accounts/auth/login/', requestOptions)
+        .then(response => response.json())
+        .then(data => console.log('majid coschesh'))
     actions.resetForm();
 };
 

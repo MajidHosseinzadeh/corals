@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { InputContainer, InputField } from '@/components/common/Input'
-import {ProductPrice } from '@/components/uncommon/profile_components/Orders';
+import { ProductPrice } from '@/components/uncommon/profile_components/Orders';
 
 export const SButton = styled.button`
     @import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@200&display=swap');
@@ -78,7 +78,6 @@ const Item = styled.div`
 
 
 const SearchPage = () => {
-
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredItems, setFilteredItems] = useState([]);
   const [hasMore, setHasMore] = useState(true);
@@ -87,46 +86,31 @@ const SearchPage = () => {
   const [startIndex, setStartIndex] = useState(0);
   const [endIndex, setEndIndex] = useState(10);
 
-
   useEffect(() => {
-    const fetchedItems = [
-      { id: 1, searchTitle: 'item 1 mohammad', price: '10$' },
-      { id: 2, searchTitle: 'item 2', price: '10$' },
-      { id: 3, searchTitle: 'item 3', price: '10$' },
-      { id: 4, searchTitle: 'item 1', price: '10$' },
-      { id: 5, searchTitle: 'item 2', price: '10$' },
-      { id: 6, searchTitle: 'item 3', price: '10$' },
-      { id: 7, searchTitle: 'item 1', price: '10$' },
-      { id: 8, searchTitle: 'item 2', price: '10$' },
-      { id: 9, searchTitle: 'item 3', price: '10$' },
-      { id: 10, searchTitle: 'item 1', price: '10$' },
-      { id: 11, searchTitle: 'item 2', price: '10$' },
-      { id: 12, searchTitle: 'item 3', price: '10$' },
-      { id: 13, searchTitle: 'item 1', price: '10$' },
-      { id: 14, searchTitle: 'item 2', price: '10$' },
-      { id: 15, searchTitle: 'item 3', price: '10$' },
-      { id: 16, searchTitle: 'item 1', price: '10$' },
-      { id: 17, searchTitle: 'item 2', price: '10$' },
-      { id: 18, searchTitle: 'item 3', price: '10$' },
-      { id: 19, searchTitle: 'item 1', price: '10$' },
-      { id: 20, searchTitle: 'item 2', price: '10$' },
-      { id: 21, searchTitle: 'item 3', price: '10$' },
-      { id: 22, searchTitle: 'item 1', price: '10$' },
-      { id: 23, searchTitle: 'item 2', price: '10$' },
-      { id: 24, searchTitle: 'item 3', price: '10$' },
-    ];
-    setItems(fetchedItems);
+    fetchItems();
   }, []);
 
-  const handleSearch = (event) => {
-    const term = event.target.value;
-    setSearchTerm(term);
-    setPage(1);
+  const fetchItems = async () => {
+    try {
+      const response = await fetch('/api/items');
+      if (response.ok) {
+        const data = await response.json();
+        setItems(data);
+      } else {
+        console.error('Failed to fetch items:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Failed to fetch items:', error);
+    }
+  };
+
+  const handleSearch = () => {
     setHasMore(true);
     const filtered = items.filter((item) =>
-      item.searchTitle.includes(term)
+      item.searchTitle.includes(searchTerm)
     );
-    setFilteredItems(filtered);
+    setFilteredItems(filtered.slice(0, endIndex));
+    setHasMore(filtered.length > endIndex);
   };
 
   const loadMoreItems = () => {
@@ -139,25 +123,22 @@ const SearchPage = () => {
       <InputContainer>
         <InputField
           placeholder='Search'
-          id="search"
-          type="text"
+          id='search'
+          type='text'
           value={searchTerm}
-          onChange={handleSearch}
+          onChange={(event) => setSearchTerm(event.target.value)}
         />
+        <SButton onClick={handleSearch}>Search</SButton>
       </InputContainer>
       <Container>
-      {(searchTerm ? filteredItems : 
-      items.slice(startIndex, endIndex)).map((item) => (
-            <Item key={item.id}>
-              <ProductImage alt="alt" src={'/footer.jpg'}/>
-              <ProductPrice>{item.price}</ProductPrice>
-            </Item>
-          ))}
-          
-        </Container>
-        {endIndex < items.length && (
-        <SButton onClick={loadMoreItems}>Load More</SButton>
-      )}
+        {filteredItems.map((item) => (
+          <Item key={item.id}>
+            <ProductImage alt='alt' src={'/footer.jpg'} />
+            <ProductPrice>{item.price}</ProductPrice>
+          </Item>
+        ))}
+      </Container>
+      {hasMore && <SButton onClick={loadMoreItems}>Load More</SButton>}
     </ContainerDiv>
   );
 };

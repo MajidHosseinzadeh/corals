@@ -1,8 +1,10 @@
 import { Typography } from '@/components/common/Typography'
+import useAuthentication from '@/components/hooks/useAuthentication'
 import Navbar from '@/components/rare/navbar/Navbar'
 import Orders from '@/components/uncommon/profile_components/Orders'
 import Profile from '@/components/uncommon/profile_components/Profile'
-import React from 'react'
+import { useRouter } from 'next/router'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 const ProfileContainer = styled.div`
@@ -20,9 +22,35 @@ const ProfilePage = styled.div`
 
 
 const index = () => {
+
+    const router = useRouter();
+    const [isLoading, setIsLoading] = useState(true);
+    // const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const isLoggedIn = false
+
+
+    useEffect(() => {
+        const fetchAuthStatus = async () => {
+            // const isLoggedIn = useAuthentication();
+            // setIsLoggedIn(isLoggedIn);
+            setIsLoading(false);
+        };
+
+        fetchAuthStatus();
+    }, []);
+
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
+    if (!isLoggedIn) {
+        router.push('/login'); // Redirect to login page if not authenticated
+        return null;
+    }
+
     return (
         <ProfileContainer>
-            <Navbar/>
+            <Navbar />
             <Typography>Profile</Typography>
             <ProfilePage>
                 <Profile />
@@ -30,6 +58,8 @@ const index = () => {
             </ProfilePage>
         </ProfileContainer>
     )
+
+
 }
 
 export default index
