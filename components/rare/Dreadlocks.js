@@ -17,9 +17,17 @@ const Sec = styled.section`
     width: 40%;
     height: auto;
   }
+  @media ${devices.md} {
+    margin-top: 15%;
+  }
+
   @media ${devices.sm} {
     flex-direction: column;
-    heigth: 150vh
+    margin-top: 30%;
+    & .img{
+        width: 60%;
+        height: auto;
+      }
   }
 `
 const Right = styled.div`
@@ -46,7 +54,7 @@ const Head = styled.h1`
         font-size: 3rem;
     }
     @media ${devices.sm} {
-        font-size: 2.2rem;
+        font-size: 2rem;
         text-align: center;
 
     }
