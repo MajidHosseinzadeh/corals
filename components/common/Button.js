@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { devices } from '../constants/devices'
 
 
 export const Button = (props) => {
@@ -27,6 +28,22 @@ export const Button = (props) => {
         transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
         touch-action: manipulation;
         will-change: transform;
+    }
+    @media ${devices.lg} {
+        width: ${props.lgsize};
+        font-size: ${props.lgfont};
+    }
+    @media ${devices.md} {
+        width: ${props.mdsize};
+        font-size: ${props.mdfont};
+    }
+    @media ${devices.sm} {
+        width: ${props.smsize};
+        font-size: ${props.smfont};
+    }
+    @media ${devices.xs} {
+        width: ${props.xssize};
+        font-size: ${props.xsfont};
     }
     
     &:hover {

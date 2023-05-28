@@ -9,7 +9,6 @@ const Home = () => {
     <div>
       <Navbar />
       <Dreadlocks />
-      <Cart />
     </div>
   )
 }
