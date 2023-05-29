@@ -1,14 +1,15 @@
 import Image from 'next/image';
-import { useRef, useState } from 'react';
+import React from 'react';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import styled from 'styled-components';
-import { Typography } from '../common/Typography';
-
-
 
 const CartContainer = styled.div`
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: hidden;
+  padding: 16px;
   align-items: center;
-  width: 100%;
+  justify-content: flex-start;
 `;
 
 const Wrapper = styled.div`
@@ -16,18 +17,32 @@ const Wrapper = styled.div`
   
 `;
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  display: flex;
-  margin-top: 10px;
-  margin-left: 25px;
-  margin-right: 25px;
-  width: max-content;
-  transform: translateX(0px);
-  transition: all 1s ease;
+const ArrowLeft = styled(AiOutlineArrowLeft)`
+    background-color: white;
+    color: black;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    position: absolute;
+    z-index: 99;
+    top: 100px;
+    left: 10px;
+    cursor: pointer;
+    left: 0;
 `
-
+const ArrowRight = styled(AiOutlineArrowRight)`
+    background-color: white;
+    color: black;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    position: absolute;
+    z-index: 99;
+    bottom: 100px;
+    right: 10px;
+    cursor: pointer;
+    right: 0;
+`
 const ProductCard = styled.div`
   display: flex;
   flex-direction: column;
@@ -52,38 +67,8 @@ const ProductPrice = styled.span`
   font-weight: bold;
   color: white;
 `;
-
-const ArrowLeft = styled(AiOutlineArrowLeft)`
-    background-color: white;
-    color: black;
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    position: absolute;
-    z-index: 99;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    cursor: pointer;
-    left: 0;
-`
-const ArrowRight = styled(AiOutlineArrowRight)`
-    background-color: white;
-    color: black;
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    position: absolute;
-    z-index: 99;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    cursor: pointer;
-    right: 0;
-`
-
 const items = [
-  { id: 1, src: "/footer.jpg", width: 200, height: 200, price: 1000, },
+  { id: 1, src: "/footer.jpg", width: 200, height: 200, price: 2, },
   { id: 2, src: "/footer.jpg", width: 200, height: 200, price: 1000, },
   { id: 3, src: "/footer.jpg", width: 200, height: 200, price: 1000, },
   { id: 4, src: "/footer.jpg", width: 200, height: 200, price: 1000, },
@@ -94,55 +79,45 @@ const items = [
   { id: 9, src: "/footer.jpg", width: 200, height: 200, price: 1000, },
   { id: 10, src: "/footer.jpg", width: 200, height: 200, price: 1000, },
   { id: 11, src: "/footer.jpg", width: 200, height: 200, price: 1000, },
-  { id: 12, src: "/footer.jpg", width: 200, height: 200, price: 1000, },
+  { id: 12, src: "/footer.jpg", width: 200, height: 200, price: 1, },
 
 
 ];
-
 const Cart = () => {
-  const [isMoving, setIsMoving] = useState(false);
-  const [slideNumber, setSlideNumber] = useState(-1);
-
-  const listRef = useRef();
-
-  const handleClick = (direction) => {
-    let distance = listRef.current.getBoundingClientRect().x - 50;
-    if (direction === "left" && slideNumber > -1 && !isMoving) {
-      setIsMoving(true);
-      setSlideNumber(slideNumber - 1);
-      listRef.current.style.transform = `translateX(${256 + distance}px)`;
-      setTimeout(set, 1000);
-    }
-    if (direction === "right" && slideNumber < 6 && !isMoving) {
-      setIsMoving(true);
-      setSlideNumber(slideNumber + 1);
-      listRef.current.style.transform = `translateX(${-256 + distance}px)`;
-      setTimeout(set, 1000);
-    }
+  const scrollRight = () => {
+    const container = document.getElementById('cart-container');
+    container.scrollBy({
+      left: 256,
+      behavior: 'smooth',
+    });
   };
 
-  function set() {
-    setIsMoving(false);
-  }
+  const scrollLeft = () => {
+    const container = document.getElementById('cart-container');
+    container.scrollBy({
+      left: -256,
+      behavior: 'smooth',
+    });
+  };
 
   return (
-    <CartContainer>
-      <Typography color='white' fontSize='40px'>Most</Typography>
-      <Wrapper >
-        <ArrowLeft onClick={() => handleClick("left")} />
-        <Container ref={listRef}>
-          {items.map((item) => (
-            <ProductCard key={item.id}>
-              <ProductImage alt="alt" src={item.src} width={item.width} height={item.height} />
-              <ProductPrice>{item.price}</ProductPrice>
-            </ProductCard>
-          ))}
-        </Container>
-        <ArrowRight onClick={() => handleClick("right")} />
+    <div>
+      <Wrapper>
+        <ArrowLeft onClick={scrollLeft}></ArrowLeft>
       </Wrapper>
-    </CartContainer>
+      <CartContainer id="cart-container">
+        {items.map((item) => (
+          <ProductCard key={item.id}>
+            <ProductImage alt="alt" src={item.src} width={item.width} height={item.height} />
+            <ProductPrice>{item.price}</ProductPrice>
+          </ProductCard>
+        ))}
+      </CartContainer>
+      <Wrapper>
+        <ArrowRight onClick={scrollRight}></ArrowRight>
+      </Wrapper>
+    </div>
   );
 };
 
 export default Cart;
-
