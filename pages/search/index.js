@@ -77,7 +77,7 @@ const Item = styled.div`
 `;
 
 
-const SearchPage = () => {
+const SearchPage = (searchValue) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredItems, setFilteredItems] = useState([]);
   const [hasMore, setHasMore] = useState(true);

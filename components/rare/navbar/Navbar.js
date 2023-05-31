@@ -4,20 +4,31 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import { SLink } from '@/components/common/Link';
 import { devices } from '@/components/constants/devices';
+import SearchInput from '@/components/common/SearchInput';
 
 const Nav = styled.nav`
   position: fixed;
   top: 0;
+  min-width: 100%;
+  max-width: 100%;
+  height: 200px;
+  z-index: 999;
+  background-color: #f5f5dc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
+
+
+const InsideNav = styled.div`
+  width: ${({ width }) => width || "100%"};;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
-  background-color: #f5f5dc;
-  min-width: 100%;
-  max-width: 100%;
-  height: 10%;
-  z-index: 999;
-`;
+  height: 100px;
+`
 
 const Ul = styled.ul`
   width: auto;
@@ -28,6 +39,14 @@ const Ul = styled.ul`
   @media (${devices.lg}) {
     display: none;
   }
+`;
+
+const Ull = styled.ul`
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
 `;
 const UlMenu = styled.ul`
   width: auto;
@@ -89,9 +108,36 @@ const Navbar = () => {
 
   return (
     <Nav>
+      <InsideNav width='90%'>
+        <SearchInput/>
+        <Ull>
+          <Li>
+            <SLink href="/login">
+              <Button
+                name="Login"
+                font="14px"
+                size="6.5rem"
+                background="#E1BEA5"
+                color="#070707"
+                border="#f5f5dc"
+                hoverb="white"
+                hoverc="#070707"
+                hoverborder="#070707"
+              />
+            </SLink>
+          </Li>
+          <Li>
+            <SLink href="/register" hcolor="black">
+              Signup
+            </SLink>
+          </Li>
+        </Ull>
+      </InsideNav>
+      <InsideNav width='90%'>
       <Link href="#link">
         <div>Logo</div>
       </Link>
+      
       <Ul>
         <Li>
           <Button
@@ -150,30 +196,7 @@ const Navbar = () => {
           />
         </Li>
       </Ul>
-      <Ul>
-        <Li>
-          <SLink href="/login">
-            <Button
-              name="Login"
-              font="14px"
-              size="6.5rem"
-              background="#E1BEA5"
-              color="#070707"
-              border="#f5f5dc"
-              hoverb="white"
-              hoverc="#070707"
-              hoverborder="#070707"
-            >
-              Login
-            </Button>
-          </SLink>
-        </Li>
-        <Li>
-          <SLink href="/register" hcolor="black">
-            Signup
-          </SLink>
-        </Li>
-      </Ul>
+      
       <MenuIcon onClick={toggleSideMenu}>
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
           <path d="M0 0h24v24H0z" fill="none" />
@@ -247,30 +270,10 @@ const Navbar = () => {
             />
           </Li>
           </UlMenu>
-          <UlMenu>
-          <Li>
-            <SLink href="/login">
-              <Button
-                name="Login"
-                font="14px"
-                size="6.5rem"
-                background="#E1BEA5"
-                color="#070707"
-                border="#f5f5dc"
-                hoverb="white"
-                hoverc="#070707"
-                hoverborder="#070707"
-              />
-            </SLink>
-          </Li>
-          <Li>
-            <SLink href="/register" hcolor="black">
-              Signup
-            </SLink>
-          </Li>
-          </UlMenu>
+          
         </SideMenuContent>
       </SideMenu>
+      </InsideNav>
     </Nav>
   );
 };
