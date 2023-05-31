@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, use } from 'react';
 import styled from 'styled-components';
 import { InputContainer, InputField } from '@/components/common/Input'
 import { ProductPrice } from '@/components/uncommon/profile_components/Orders';
+import { getLocalStorageItem, setLocalStorageItem } from '@/components/common/LocalStorage';
 
 export const SButton = styled.button`
     @import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@200&display=swap');
@@ -77,7 +78,7 @@ const Item = styled.div`
 `;
 
 
-const SearchPage = (searchValue) => {
+const SearchPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredItems, setFilteredItems] = useState([]);
   const [hasMore, setHasMore] = useState(true);
@@ -85,10 +86,17 @@ const SearchPage = (searchValue) => {
   const [items, setItems] = useState([]);
   const [startIndex, setStartIndex] = useState(0);
   const [endIndex, setEndIndex] = useState(10);
-
+  const savedData = getLocalStorageItem('myData');
+  const fromLocal = getLocalStorageItem('fromLocal');
+  const [filtered, setFiltered] = useState([])
   useEffect(() => {
     fetchItems();
   }, []);
+
+  
+  const itemms = [
+    {id: 1, searchTitle: 'item' }
+  ]
 
   const fetchItems = async () => {
     try {
@@ -106,13 +114,21 @@ const SearchPage = (searchValue) => {
 
   const handleSearch = () => {
     setHasMore(true);
-    const filtered = items.filter((item) =>
-      item.searchTitle.includes(searchTerm)
-    );
+    if (fromLocal) {
+      setFiltered(itemms.filter((item) =>
+        item.searchTitle.includes(savedData)
+      ))
+      console.log(savedData)
+      setLocalStorageItem('fromLocal', false)
+    } else if (!fromLocal) {
+      setFiltered(items.filter((item) =>
+        item.searchTitle.includes(searchTerm)
+      ))
+    }
+
     setFilteredItems(filtered.slice(0, endIndex));
     setHasMore(filtered.length > endIndex);
   };
-
   const loadMoreItems = () => {
     setEndIndex((prevEndIndex) => prevEndIndex + 10);
     setFilteredItems(items.slice(startIndex, endIndex));
