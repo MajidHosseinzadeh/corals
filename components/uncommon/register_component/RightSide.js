@@ -1,6 +1,7 @@
 import { Button } from '@/components/common/Button'
 import { MLink, SLink } from '@/components/common/Link'
 import { Typography } from '@/components/common/Typography'
+import { devices } from '@/components/constants/devices'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -16,6 +17,13 @@ const RegSection = styled.div`
     height: 45rem;
     opacity: 0.5;
   }
+  @media ${devices.lg} {
+    position: absolute;
+    z-index: 0;
+    & .img{
+      opacity: 0.4;
+    }
+  }
 `
 
 const LoginContainer = styled.div`
@@ -25,6 +33,9 @@ const LoginContainer = styled.div`
   flex-direction: row;
   & Button{
     margin: 5px 20px;
+  }
+  @media ${devices.lg} {
+    justify-content: center;
   }
 `
 

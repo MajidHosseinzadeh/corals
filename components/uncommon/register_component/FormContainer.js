@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { AiOutlineGoogle } from 'react-icons/ai'
 import { useFormik } from 'formik'
 import { schema } from '@/schemas'
+import { devices } from '@/components/constants/devices'
 
 const LeftContainer = styled.div`
     width: 50vw;
@@ -14,6 +15,10 @@ const LeftContainer = styled.div`
     align-items: center;
     flex-direction: column;
     background-color: black
+    @media ${devices.lg} {
+        position: absolute; 
+        z-index: 999;
+    }
 `
 
 const TitleFlex = styled.div`
@@ -21,16 +26,23 @@ const TitleFlex = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
 `
 
 const Welcome = styled.h1`
     font-size: 40px;
     color: #E1BEA5;
+    @media ${devices.lg} {
+        z-index: 999;
+    }
 
 `
 const Create = styled.h3`
     font-size: 12px;
     color: white;
+    @media ${devices.lg} {
+        z-index: 999;
+    }
 `
 
 export const InputFlex = styled.div`

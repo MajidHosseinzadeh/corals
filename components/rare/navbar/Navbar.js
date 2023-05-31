@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Button } from '../../common/Button';
 import styled from 'styled-components';
 import Link from 'next/link';
-import Image from 'next/image';
 import { SLink } from '@/components/common/Link';
 import { devices } from '@/components/constants/devices';
 

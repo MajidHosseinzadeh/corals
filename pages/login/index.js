@@ -11,21 +11,22 @@ import styled from 'styled-components';
 import { date } from 'yup';
 
 const LoginPage = styled.div`
-  width: 50vw;
-  height: 50vh;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
-
+  position: absolute;  
+  top: 0;
+  button: 0;
+  left: 0;
+  right: 0;
   & .img{
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 67vw;
     opacity: 0.5;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
+
     z-index: 0;
   }
 `
@@ -36,8 +37,7 @@ export const LoginForm = styled.form`
     align-items: center;
     flex-direction: column;
     position: absolute;
-    top: 40%;
-    left: 40%;
+
     z-index: 999;
 `
 
