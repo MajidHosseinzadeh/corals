@@ -17,13 +17,16 @@ const Sec = styled.section`
     width: 40%;
     height: auto;
   }
+  @media ${devices.lg} {
+    margin-top: 20%;
+  }
   @media ${devices.md} {
-    margin-top: 15%;
+    margin-top: 25%;
   }
 
   @media ${devices.sm} {
     flex-direction: column;
-    margin-top: 30%;
+    margin-top: 40%;
     & .img{
         width: 60%;
         height: auto;

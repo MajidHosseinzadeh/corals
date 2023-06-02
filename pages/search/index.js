@@ -118,7 +118,6 @@ const SearchPage = () => {
       setFiltered(itemms.filter((item) =>
         item.searchTitle.includes(savedData)
       ))
-      console.log(savedData)
       setLocalStorageItem('fromLocal', false)
     } else if (!fromLocal) {
       setFiltered(items.filter((item) =>
