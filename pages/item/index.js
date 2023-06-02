@@ -1,11 +1,9 @@
 import { Typography } from '@/components/common/Typography'
-import { Paragraph } from '@/components/rare/Dreadlocks'
 import ProductNavbar from '@/components/rare/navbar/ProductNavbar'
 import Image from 'next/image'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { AiOutlineShoppingCart } from 'react-icons/ai'
-import { CartContainer } from '@/components/uncommon/profile_components/Orders'
 import Navbar from '@/components/rare/navbar/Navbar'
 
 const PageContainer = styled.div`
@@ -163,12 +161,6 @@ const index = () => {
         }
         setNum(num + 1);
     }
-
-    // item.forEach((item) => {
-    //     item.comments.forEach((comment) => {
-
-    //     });
-    //   });
     return (
         <>
             <Navbar />
