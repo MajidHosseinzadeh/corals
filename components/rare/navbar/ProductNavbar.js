@@ -1,8 +1,11 @@
+import { Typography } from '@/components/common/Typography';
 import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 
 const SlideContent = styled.div`
-
+    height: auto;
+    width: 100%;
+    background-color: #f5f5f5;
 `
 
 const slideAnimation = keyframes`
@@ -16,21 +19,22 @@ const slideAnimation = keyframes`
 `;
 
 const NavbarContainer = styled.nav`
+  margin-top: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #f5f5f5;
   padding: 10px;
-  width: 40%;
+  width: 100%;
 `;
 
 const NavButton = styled.button`
   font-size: 16px;
   font-weight: bold;
   padding: 10px;
-  margin: 0 5px;
+  margin: 0 60px;
   color: ${(props) => (props.isActive ? '#ffffff' : '#000000')};
-  background-color: ${(props) => (props.isActive ? '#007bff' : 'transparent')};
+  background-color: ${(props) => (props.isActive ? '#4091d7' : 'transparent')};
   border: none;
   border-radius: 20px;
   cursor: pointer;
@@ -71,21 +75,39 @@ const Container = styled.div`
   align-items: center;
 `
 
-const ProductNavbar = () => {
+const ProductNavbar = ({ comments , about}) => {
 
-    
 
 
     const slides = [
         {
             content: (
-                <div>about</div>
+                <>
+                    {about.map((about) => (
+                        <ul key={about.id}>
+                            <li>
+                                <Typography color="black">{about.Title} : {about.Lorem}</Typography>
+                            </li>
+                        </ul>
+                    ))}
+                </>
             ),
             slideName: 'About'
         },
         {
             content: (
-                <div>comment</div>
+                <>
+                    {comments.map((comment) => (
+                        <ul key={comment.commentId}>
+                            <li>
+                                <Typography color="black">from: {comment.user}</Typography>
+                                <Typography color="black">{comment.text}</Typography>
+                                <Typography color="black">at: {comment.date}</Typography>
+                                <Typography color="black">rate: {comment.rate}</Typography>
+                            </li>
+                        </ul>
+                    ))}
+                </>
             ),
             slideName: 'Comments'
         },
@@ -115,12 +137,8 @@ const ProductNavbar = () => {
         }
     };
     const setSlide = () => {
-        slides.forEach((slide) => {
-            if (slide.slideName === activeButton) {
-                console.log(activeButton)
-                return slide.content
-            }
-        })
+        const slide = slides.find((slide) => slide.slideName === activeButton);
+        return slide ? slide.content : null;
     }
 
     return (
@@ -148,11 +166,11 @@ const ProductNavbar = () => {
                     Noth
                 </NavButton>
             </NavbarContainer>
-            <div>
+            <>
                 <SlideContent>
                     {setSlide()}
                 </SlideContent>
-            </div>
+            </>
         </>
     );
 };

@@ -10,4 +10,5 @@ export const Typography = styled.p`
   line-height: ${({ lineHeight }) => lineHeight || '1.5'};
   text-align: ${({ textAlign }) => textAlign || 'left'};
   font-family: 'Urbanist', sans-serif;
+  width: ${({ width }) => width || '100%'};
 `;

@@ -11,7 +11,7 @@ const Nav = styled.nav`
   top: 0;
   min-width: 100%;
   max-width: 100%;
-  height: 200px;
+  height: 150px;
   z-index: 999;
   background-color: #f5f5dc;
   display: flex;
@@ -27,7 +27,7 @@ const InsideNav = styled.div`
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
-  height: 100px;
+  height: 60px;
 `
 
 const Ul = styled.ul`

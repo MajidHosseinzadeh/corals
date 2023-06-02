@@ -63,7 +63,7 @@ const Head = styled.h1`
     }
 `
 
-const Paragraph = styled.p`
+export const Paragraph = styled.p`
     color: white;
     font-size: 1.4rem;
     @media ${devices.lg} {
