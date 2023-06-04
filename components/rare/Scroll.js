@@ -7,9 +7,7 @@ const Container = styled.div`
   margin: 0;
   padding: 0;
   background: rgb(2,0,36);
-  background: linear-gradient(180deg, #E1BEA5 0%, white 50%, #f5f5dc 100%); 
   background: linear-gradient(to bottom, #E1BEA5 30%, #f5f5dc 30% 50%,#E1BEA5 50% 70%, #f5f5dc 70%);
-
 `;
 
 
