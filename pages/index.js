@@ -14,7 +14,7 @@ const Home = () => {
       <Dreadlocks />
       <Cart/>
       <AnimatedScroll/>
-      <App/>
+      {/* <App/> */}
     </StrictMode>
   )
 }
