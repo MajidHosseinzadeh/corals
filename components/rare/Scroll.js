@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import styled from "styled-components";
 import Image from "next/image";
+import ScrollingImage from "./Animated";
 
 const Container = styled.div`
   margin: 0;
@@ -15,11 +16,10 @@ function useParallax(value, distance) {
     return useTransform(value, [0, 1], [-distance, distance]);
   }
   
-  const ImageContainer = styled.div`
+  const ImageContainer = styled(motion.div)`
   width: 300px;
-  height: 400px;
+  height: 300px;
   position: relative;
-  max-height: 90vh;
   margin: 20px;
   background: white;
   overflow: hidden;
@@ -36,20 +36,25 @@ const Section = styled.section`
 
 const ImageNext = styled(Image)`
   width: 300px;
-  height: 400px;
+  height: 300px;
 `
 
 const MyImage = (id, width, height) => {
   const ref = useRef(null);
+  
   const { scrollYProgress } = useScroll({ target: ref });
-  const y = useParallax(scrollYProgress, 300);
+  
+  const y = useParallax(scrollYProgress, 100);
+  const x = useTransform(scrollYProgress, [0, 1], [150, -200]);
+
+  
 
   return (
     <Section>
-      <ImageContainer key={id} ref={ref}>
+      <ImageContainer style={{ x }} key={id} ref={ref}>
         <ImageNext src='/footer.jpg' alt="n" width={100} height={100}/>
       </ImageContainer>
-      <motion.h2 style={{ y }}>{`#00`}</motion.h2>
+      <motion.h2 style={{ y }}>{`Corals`}</motion.h2>
     </Section>
   );
 };
@@ -78,6 +83,7 @@ const AnimatedScroll = () => {
     damping: 30,
     restDelta: 0.001,
   });
+  
 
   return (
     <Container>
