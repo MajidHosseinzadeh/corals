@@ -39,7 +39,7 @@ const ImageNext = styled(Image)`
   height: 300px;
 `
 
-const MyImage = (id, width, height) => {
+const MyImage = (id) => {
   const ref = useRef(null);
   
   const { scrollYProgress } = useScroll({ target: ref });
