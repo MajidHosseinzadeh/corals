@@ -75,7 +75,7 @@ const Container = styled.div`
   align-items: center;
 `
 
-const ProductNavbar = ({ comments , about}) => {
+const ProductNavbar = ({ comments}) => {
 
 
 
@@ -83,13 +83,13 @@ const ProductNavbar = ({ comments , about}) => {
         {
             content: (
                 <>
-                    {about.map((about) => (
+                    {/* {about.map((about) => (
                         <ul key={about.id}>
                             <li>
-                                <Typography color="black">{about.Title} : {about.Lorem}</Typography>
+                                <Typography color="black">{about.body} : {about.body}</Typography>
                             </li>
                         </ul>
-                    ))}
+                    ))} */}
                 </>
             ),
             slideName: 'About'
@@ -98,12 +98,12 @@ const ProductNavbar = ({ comments , about}) => {
             content: (
                 <>
                     {comments.map((comment) => (
-                        <ul key={comment.commentId}>
+                        <ul key={comment.id}>
                             <li>
-                                <Typography color="black">from: {comment.user}</Typography>
-                                <Typography color="black">{comment.text}</Typography>
-                                <Typography color="black">at: {comment.date}</Typography>
-                                <Typography color="black">rate: {comment.rate}</Typography>
+                                {/* <Typography color="black">from: {comment.user}</Typography> */}
+                                <Typography color="black">{comment.body}</Typography>
+                                {/* <Typography color="black">at: {comment.created_at}</Typography> */}
+                                {/* <Typography color="black">rate: {comment.rate}</Typography> */}
                             </li>
                         </ul>
                     ))}

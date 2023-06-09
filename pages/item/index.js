@@ -1,10 +1,12 @@
 import { Typography } from '@/components/common/Typography'
 import ProductNavbar from '@/components/rare/navbar/ProductNavbar'
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { AiOutlineShoppingCart } from 'react-icons/ai'
 import Navbar from '@/components/rare/navbar/Navbar'
+
+
 
 const PageContainer = styled.div`
     display: flex;
@@ -83,18 +85,18 @@ const item = {
     price: '$19.99',
     image: '/footer.jpg',
     about: [
-        {id: 1,Title: 'title', Lorem: 'Lorem'},
-        {id: 2,Title: 'title', Lorem: 'Lorem'},
-        {id: 3,Title: 'title', Lorem: 'Lorem'},
-        {id: 4,Title: 'title', Lorem: 'Lorem'},
-        {id: 5,Title: 'title', Lorem: 'Lorem'},
-        {id: 6,Title: 'title', Lorem: 'Lorem'},
-        {id: 7,Title: 'title', Lorem: 'Lorem'},
-        {id: 8,Title: 'title', Lorem: 'Lorem'},
-        {id: 9,Title: 'title', Lorem: 'Lorem'},
-        {id: 10,Title: 'title', Lorem: 'Lorem'},
-        {id: 11,Title: 'title', Lorem: 'Lorem'},
-        {id: 12,Title: 'title', Lorem: 'Lorem'},
+        { id: 1, Title: 'title', Lorem: 'Lorem' },
+        { id: 2, Title: 'title', Lorem: 'Lorem' },
+        { id: 3, Title: 'title', Lorem: 'Lorem' },
+        { id: 4, Title: 'title', Lorem: 'Lorem' },
+        { id: 5, Title: 'title', Lorem: 'Lorem' },
+        { id: 6, Title: 'title', Lorem: 'Lorem' },
+        { id: 7, Title: 'title', Lorem: 'Lorem' },
+        { id: 8, Title: 'title', Lorem: 'Lorem' },
+        { id: 9, Title: 'title', Lorem: 'Lorem' },
+        { id: 10, Title: 'title', Lorem: 'Lorem' },
+        { id: 11, Title: 'title', Lorem: 'Lorem' },
+        { id: 12, Title: 'title', Lorem: 'Lorem' },
     ],
     comments: [
         {
@@ -142,10 +144,29 @@ const item = {
 
     ]
 }
+export const getStaticProps = async () => {
+    try {
+        const res = await fetch("http://localhost:8000/products/lipstick-boobi/comments");
+        const data = await res.json();
+        console.log(data)
+        return {
+          props: {
+            comments: data,
+          },
+        };
+      } catch (error) {
+        console.error(error);
+        return {
+          props: {
+            comments: [],
+          },
+        };
+      }
+}
 
+const index = ({comments}) => {
 
-const index = () => {
-
+    
     const [num, setNum] = useState(0);
     const [showCounter, setShowCounter] = useState(false);
 
@@ -185,7 +206,8 @@ const index = () => {
                         <CountDisplay>{num}</CountDisplay>
                         <DIButton onClick={handleIncrement}>+</DIButton>
                     </CountContainer>}
-                    <ProductNavbar comments={item.comments} about={item.about}/>
+                    <ProductNavbar comments={comments}  />
+                    {/* about={item.about} */}
 
                 </PrimaryTextsContainer>
             </PageContainer>
