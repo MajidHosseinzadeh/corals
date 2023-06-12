@@ -9,6 +9,8 @@ import Image from 'next/image';
 import React, { useState } from 'react'
 import styled from 'styled-components';
 import { date } from 'yup';
+import CryptoJS from 'crypto-js';
+import { useRouter } from 'next/router';
 
 const LoginPage = styled.div`
   width: 100%;
@@ -41,27 +43,33 @@ export const LoginForm = styled.form`
     z-index: 999;
 `
 
-const onSubmit = async (values, actions) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-             username: values.username, 
-             password: values.password
-            })
-            // username: 'alireza', 
-            // password: 'htc u play'
-    };
-    fetch('http://localhost:8000/accounts/auth/login/', requestOptions)
-        .then(response => response.json())
-        .then(data => window.location.href = '/')
-    
-    actions.resetForm();
-};
 
 const index = () => {
-
+    const router = useRouter();
+    const onSubmit = async (values, actions) => {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                username: values.username,
+                password: values.password,
+            })
+            // username: 'alireza',
+            // password: 'htc u play'
+        };
+        fetch('http://localhost:8000/accounts/auth/login/', requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                const accessToken = data.access;
+                const encryptedToken = CryptoJS.AES.encrypt(accessToken, 'encryption_key').toString();
+                localStorage.setItem('accessToken', encryptedToken);
+                console.log(encryptedToken);
+                router.push("/profile");
+            })
+        actions.resetForm();
+    };
+    
     const [usernameVisibility, setUsernameVisibility] = useState(false);
     const [passwordVisibility, setPasswordVisibility] = useState(false);
 
@@ -119,7 +127,7 @@ const index = () => {
                 </InputFlex>
                 <Button type="submit" disabled={isSubmitting} name='Login' size='14rem' font="12px" background="#E1BEA5" color="#070707" border="#E1BEA5" hoverb="white" hoverc="#070707" hoverborder="#070707" />
                 <SLink href="/forgot" margin="20px 0px 0px 0px">
-                        forgot password ?
+                    forgot password ?
                 </SLink>
             </LoginForm>
             <Image src='/footer.jpg' width={1618} height={1080} className='img' alt='background' />

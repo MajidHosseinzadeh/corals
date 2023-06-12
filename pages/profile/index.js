@@ -1,5 +1,4 @@
 import { Typography } from '@/components/common/Typography'
-import useAuthentication from '@/components/hooks/useAuthentication'
 import Navbar from '@/components/rare/navbar/Navbar'
 import Orders from '@/components/uncommon/profile_components/Orders'
 import Profile from '@/components/uncommon/profile_components/Profile'
@@ -22,30 +21,24 @@ const ProfilePage = styled.div`
 
 
 const index = () => {
-
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(true);
-    // const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const isLoggedIn = false
-
 
     useEffect(() => {
         const fetchAuthStatus = async () => {
-            // const isLoggedIn = useAuthentication();
-            // setIsLoggedIn(isLoggedIn);
-            setIsLoading(false);
+            const encryptedToken = localStorage.getItem('accessToken');
+            if (!encryptedToken) {
+                router.push('/login');
+            }
+            else {
+                setIsLoading(false)
+            }
         };
-
         fetchAuthStatus();
     }, []);
 
     if (isLoading) {
         return <div>Loading...</div>;
-    }
-
-    if (!isLoggedIn) {
-        router.push('/login'); // Redirect to login page if not authenticated
-        return null;
     }
 
     return (

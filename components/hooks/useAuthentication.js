@@ -8,12 +8,15 @@ const useAuthentication = () => {
     useEffect(() => {
         const checkAuthentication = async () => {
             try {
-                const response = await fetch('/api/check-auth');
-                if (!response.ok) {
+                const encryptedToken = localStorage.getItem('accessToken');
+                if (!encryptedToken) {
                     throw new Error('false');
                 }
-                setIsAuthenticated(true);
-                return true;
+                else {
+                    setIsAuthenticated(true);
+                    return true;
+                }
+
             } catch (err) {
                 console.log(err);
                 return false;
