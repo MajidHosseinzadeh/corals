@@ -207,7 +207,6 @@ const index = ({comments}) => {
                         <DIButton onClick={handleIncrement}>+</DIButton>
                     </CountContainer>}
                     <ProductNavbar comments={comments}  />
-                    {/* about={item.about} */}
 
                 </PrimaryTextsContainer>
             </PageContainer>

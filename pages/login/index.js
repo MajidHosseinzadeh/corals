@@ -41,19 +41,22 @@ export const LoginForm = styled.form`
     z-index: 999;
 `
 
-const onSubmit = async (actions) => {
+const onSubmit = async (values, actions) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-             username: 'majidhzdh', 
-             password: 'majid@123'
+             username: values.username, 
+             password: values.password
             })
+            // username: 'alireza', 
+            // password: 'htc u play'
     };
     fetch('http://localhost:8000/accounts/auth/login/', requestOptions)
         .then(response => response.json())
-        .then(data => console.log('majid coschesh'))
+        .then(data => window.location.href = '/')
+    
     actions.resetForm();
 };
 

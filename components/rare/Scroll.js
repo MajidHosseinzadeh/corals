@@ -88,7 +88,7 @@ const AnimatedScroll = () => {
   return (
     <Container>
       {items.map((image) => (
-        <MyImage id={image.id} alt={image.alt} src={image.src} width={image.width} height={image.height}/>
+        <MyImage key={image.id} alt={image.alt} src={image.src} width={image.width} height={image.height}/>
       ))}
       <Progress style={{ scaleX }} />
     </Container>
