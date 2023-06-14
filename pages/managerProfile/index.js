@@ -25,8 +25,8 @@ const index = () => {
             <Navbar/>
             <Typography>Profile</Typography>
             <ProfilePage>
-                <Profile />
-                <ProductForm />
+                <Profile/>
+                <ProductForm/>
             </ProfilePage>
         </ProfileContainer>
     )

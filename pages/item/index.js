@@ -1,219 +1,165 @@
-import { Typography } from '@/components/common/Typography'
-import ProductNavbar from '@/components/rare/navbar/ProductNavbar'
-import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
-import { AiOutlineShoppingCart } from 'react-icons/ai'
-import Navbar from '@/components/rare/navbar/Navbar'
+import React, { useState, useEffect, use } from 'react';
+import styled from 'styled-components';
+import { InputContainer, InputField } from '@/components/common/Input'
+import { ProductPrice } from '@/components/uncommon/profile_components/Orders';
+import { getLocalStorageItem, setLocalStorageItem } from '@/components/common/LocalStorage';
+import Link from 'next/link';
 
-
-
-const PageContainer = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-direction: row;
-    margin-top: 12%;
-`
-
-const ItemImage = styled(Image)`
-    width: 25vw;
-    height: 25vw;
-    margin: 5%;
-`
-const PrimaryTextsContainer = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-direction: column;
-`
-
-const CartAndPrice = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
-`
-const InformationsContainer = styled.div`
-
-`
-
-const CartImage = styled(AiOutlineShoppingCart)`
-    color: white;
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
-`
-
-const CountContainer = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-`
-const DIButton = styled.button`
+export const SButton = styled.button`
     @import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@200&display=swap');
-    width: 50px;
-    heigth: 50px;
-    color: white;
-    border: 2px solid white;
-    background-color: black;
-    border-radius: 0px;
-    margin: 0px;
+    
+    display: flex;
+    justify-content: center;
+    width: 14rem;
+    appearance: none;
+    background-color: #E1BEA5;
+    border: 2px solid #E1BEA5;
+    border-radius: 6px;
+    box-sizing: border-box;
+    color: #070707;
     cursor: pointer;
+    font-family: 'Urbanist', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0;
+    outline: none;
+    padding: 8px 16px;
     text-align: center;
-    padding: 10px;
-    font-size: 20px;
+    text-decoration: none;
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    touch-action: manipulation;
+    will-change: transform;
+  
+  
+  &:hover {
+      color: #070707;
+      background-color: white;
+      box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+      transform: translateY(-2px);
+      border: 2px solid #070707;
+  }
+  
+  &:active {
+      box-shadow: none;
+      transform: translateY(0);
+  }
+  
+  &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
 `
-const CountDisplay = styled.div`
-    @import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@200&display=swap');
-    width: 100px;
-    heigth: 50px;
-    color: black;
-    background-color: white;
-    border: 2px solid white;
-    border-radius: 0px;
-    margin: 0px;
-    text-align: center;
-    padding: 10px;
-    font-size: 20px;
-`
-const item = {
-    id: 1,
-    name: 'Rice Cream',
-    detail: 'Simple Text. Lorem ipsum dolor sit amet consectetur adipiscing elit. Curabitur id suscipit ex.Suspendisse rhoncus laoreet purus quis elementum.',
-    price: '$19.99',
-    image: '/footer.jpg',
-    about: [
-        { id: 1, Title: 'title', Lorem: 'Lorem' },
-        { id: 2, Title: 'title', Lorem: 'Lorem' },
-        { id: 3, Title: 'title', Lorem: 'Lorem' },
-        { id: 4, Title: 'title', Lorem: 'Lorem' },
-        { id: 5, Title: 'title', Lorem: 'Lorem' },
-        { id: 6, Title: 'title', Lorem: 'Lorem' },
-        { id: 7, Title: 'title', Lorem: 'Lorem' },
-        { id: 8, Title: 'title', Lorem: 'Lorem' },
-        { id: 9, Title: 'title', Lorem: 'Lorem' },
-        { id: 10, Title: 'title', Lorem: 'Lorem' },
-        { id: 11, Title: 'title', Lorem: 'Lorem' },
-        { id: 12, Title: 'title', Lorem: 'Lorem' },
-    ],
-    comments: [
-        {
-            commentId: 1,
-            rate: 3.5,
-            text: 'Great',
-            user: 'alireza',
-            date: '',
-        },
-        {
-            commentId: 2,
-            rate: 3.5,
-            text: 'Great',
-            user: 'alireza',
-            date: '',
-        },
-        {
-            commentId: 3,
-            rate: 3.5,
-            text: 'Great',
-            user: 'alireza',
-            date: '',
-        },
-        {
-            commentId: 4,
-            rate: 3.5,
-            text: 'Great',
-            user: 'alireza',
-            date: '',
-        },
-        {
-            commentId: 5,
-            rate: 3.5,
-            text: 'Great',
-            user: 'alireza',
-            date: '',
-        },
-        {
-            commentId: 6,
-            rate: 3.5,
-            text: 'Great',
-            user: 'alireza',
-            date: '',
-        },
 
-    ]
-}
+const ContainerDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`
+
+const Container = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
+
+const ProductImage = styled.img`
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+`;
+
+const Item = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px;
+  padding: 0px 30px;
+`;
 export const getStaticProps = async () => {
     try {
-        const res = await fetch("http://localhost:8000/products/lipstick-boobi/comments");
+        const res = await fetch("http://localhost:8000/products/");
         const data = await res.json();
-        console.log(data)
         return {
-          props: {
-            comments: data,
-          },
+            props: {
+                prods: data,
+            },
         };
-      } catch (error) {
+    } catch (error) {
         console.error(error);
         return {
-          props: {
-            comments: [],
-          },
+            props: {
+                prods: [],
+            },
         };
-      }
+    }
+
 }
 
-const index = ({comments}) => {
+const SearchPage = ({ prods }) => {
 
-    
-    const [num, setNum] = useState(0);
-    const [showCounter, setShowCounter] = useState(false);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [filteredItems, setFilteredItems] = useState([]);
+    const [items, setItems] = useState([]);
+    const [filtered, setFiltered] = useState([]);
 
-    const handleDecrement = () => {
-        if (num > 0) {
-            setNum(num - 1);
-        }
 
-    }
-    const handleIncrement = () => {
-        if (!showCounter) {
-            setShowCounter(true);
-        }
-        setNum(num + 1);
-    }
+    const itemms = [
+        { id: 1, searchTitle: 'item', price: 100 },
+        { id: 2, searchTitle: 'item', price: 100 },
+        { id: 3, searchTitle: 'item', price: 100 },
+        { id: 4, searchTitle: 'item', price: 100 },
+        { id: 5, searchTitle: 'item', price: 100 },
+        { id: 6, searchTitle: 'item', price: 100 },
+        { id: 7, searchTitle: 'item', price: 100 },
+        { id: 8, searchTitle: 'item', price: 100 },
+        { id: 9, searchTitle: 'item', price: 100 },
+        { id: 10, searchTitle: 'item', price: 100 },
+        { id: 11, searchTitle: 'item', price: 100 },
+        { id: 12, searchTitle: 'item', price: 100 },
+        { id: 13, searchTitle: 'item', price: 100 },
+        { id: 14, searchTitle: 'item', price: 100 },
+        { id: 15, searchTitle: 'item', price: 100 },
+        { id: 16, searchTitle: 'item', price: 100 },
+        { id: 17, searchTitle: 'item', price: 100 },
+        { id: 18, searchTitle: 'item', price: 100 },
+        { id: 19, searchTitle: 'item', price: 100 }
+    ]
+
+
+
+    const handleSearch = () => {
+        setFiltered(itemms.filter((item) =>
+            item.searchTitle.includes(searchTerm)
+        ))
+        setFilteredItems(filtered);
+    };
+
     return (
-        <>
-            <Navbar />
-            <PageContainer>
-                <ItemImage src={'/footer.jpg'} alt='aaa' width={100} height={100} />
-                <PrimaryTextsContainer>
-                    <Typography color='#E1BEA5' fontSize="50px" fontWeight="bold">
-                        {item.name}
-                    </Typography>
+        <ContainerDiv>
+            <InputContainer>
+                <InputField
+                    placeholder='Search'
+                    id='search'
+                    type='text'
+                    value={searchTerm}
+                    onChange={(event) => setSearchTerm(event.target.value)}
+                />
+                <SButton onClick={handleSearch}>Search</SButton>
+            </InputContainer>
+            <Container>
+                {prods.map((item) => (
+                    <Link href={`/item/${item.slug}`} key={item.url}>
+                        <Item>
+                            <ProductImage alt='alt' src={'/footer.jpg'} />
+                            <ProductPrice>{item.price}</ProductPrice>
+                        </Item>
+                    </Link>
+                ))}
+            </Container>
+        </ContainerDiv>
+    );
+};
 
-                    <Typography width="70%" color='white' fontSize="20px" margin="20px 0px 0px 0px">
-                        {item.detail}
-                    </Typography>
-                    <CartAndPrice>
-                        <Typography color='white' fontSize="26px" fontWeight="bold">
-                            {item.price}
-                        </Typography>
-                        <CartImage onClick={handleIncrement} />
-                    </CartAndPrice>
-                    {showCounter && <CountContainer>
-                        <DIButton onClick={handleDecrement}>-</DIButton>
-                        <CountDisplay>{num}</CountDisplay>
-                        <DIButton onClick={handleIncrement}>+</DIButton>
-                    </CountContainer>}
-                    <ProductNavbar comments={comments}  />
-
-                </PrimaryTextsContainer>
-            </PageContainer>
-        </>
-    )
-}
-
-export default index
-
-
+export default SearchPage;
