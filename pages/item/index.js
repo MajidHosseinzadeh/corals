@@ -102,38 +102,20 @@ const SearchPage = ({ prods }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredItems, setFilteredItems] = useState([]);
     const [items, setItems] = useState([]);
-    const [filtered, setFiltered] = useState([]);
+    const [filtered, setFiltered] = useState();
 
-
-    const itemms = [
-        { id: 1, searchTitle: 'item', price: 100 },
-        { id: 2, searchTitle: 'item', price: 100 },
-        { id: 3, searchTitle: 'item', price: 100 },
-        { id: 4, searchTitle: 'item', price: 100 },
-        { id: 5, searchTitle: 'item', price: 100 },
-        { id: 6, searchTitle: 'item', price: 100 },
-        { id: 7, searchTitle: 'item', price: 100 },
-        { id: 8, searchTitle: 'item', price: 100 },
-        { id: 9, searchTitle: 'item', price: 100 },
-        { id: 10, searchTitle: 'item', price: 100 },
-        { id: 11, searchTitle: 'item', price: 100 },
-        { id: 12, searchTitle: 'item', price: 100 },
-        { id: 13, searchTitle: 'item', price: 100 },
-        { id: 14, searchTitle: 'item', price: 100 },
-        { id: 15, searchTitle: 'item', price: 100 },
-        { id: 16, searchTitle: 'item', price: 100 },
-        { id: 17, searchTitle: 'item', price: 100 },
-        { id: 18, searchTitle: 'item', price: 100 },
-        { id: 19, searchTitle: 'item', price: 100 }
-    ]
-
+    useEffect(() => {
+        setItems(prods)
+    }, []);
 
 
     const handleSearch = () => {
-        setFiltered(itemms.filter((item) =>
-            item.searchTitle.includes(searchTerm)
-        ))
+        const filtered = (prods.filter((item) => {
+            item.title.includes(searchTerm)
+        }))
         setFilteredItems(filtered);
+        console.log(filteredItems);
+        console.log(searchTerm);
     };
 
     return (
@@ -149,17 +131,27 @@ const SearchPage = ({ prods }) => {
                 <SButton onClick={handleSearch}>Search</SButton>
             </InputContainer>
             <Container>
-                {prods.map((item) => (
-                    <Link href={`/item/${item.slug}`} key={item.url}>
-                        <Item>
-                            <ProductImage alt='alt' src={'/footer.jpg'} />
-                            <ProductPrice>{item.price}</ProductPrice>
-                        </Item>
-                    </Link>
-                ))}
+                {prods
+                    .map((item) => (
+                        <Link href={`/item/${item.slug}`} key={item.url}>
+                            <Item>
+                                <ProductImage alt='alt' src={'/footer.jpg'} />
+                                <ProductPrice>{item.price}</ProductPrice>
+                            </Item>
+                        </Link>
+                    ))}
+
             </Container>
         </ContainerDiv>
     );
 };
 
+// {prods.map((item) => (
+{/* <Link href={`/item/${item.slug}`} key={item.url}>
+    <Item>
+        <ProductImage alt='alt' src={'/footer.jpg'} />
+        <ProductPrice>{item.price}</ProductPrice>
+    </Item>
+</Link> */}
+// ))}
 export default SearchPage;
