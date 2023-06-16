@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from '../../common/Button';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { SLink } from '@/components/common/Link';
 import { devices } from '@/components/constants/devices';
 import SearchInput from '@/components/common/SearchInput';
-
+import { useRouter } from 'next/router';
+import { BsFillPersonFill } from 'react-icons/bs'
+import Image from 'next/image';
 const Nav = styled.nav`
   position: fixed;
   top: 0;
@@ -99,18 +101,74 @@ const CloseIcon = styled.div`
   cursor: pointer;
 `;
 
+const ProfileIcon = styled(Image)`
+  width: 3rem;
+  height: 3rem; 
+  cursor: pointer;
+  margin: 20px;
+`;
+
 const Navbar = () => {
   const [isSideMenuOpen, setSideMenuOpen] = useState(false);
-
+  const [loggedIn, setLoggedIn] = useState(false);
   const toggleSideMenu = () => {
     setSideMenuOpen(!isSideMenuOpen);
   };
 
+  const router = useRouter();
+
+  useEffect(() => {
+    const fetchAuthStatus = async () => {
+      const encryptedToken = localStorage.getItem('accessToken');
+      if (!encryptedToken) {
+        setLoggedIn(false)
+      }
+      else {
+        setLoggedIn(true)
+      }
+    };
+    fetchAuthStatus();
+  }, []);
+
   return (
     <Nav>
       <InsideNav width='90%'>
-        <SearchInput/>
-        <Ull>
+        <SearchInput />
+        {!loggedIn ?
+          <Ull>
+            <Li>
+              <SLink href="/login">
+                <Button
+                  name="Login"
+                  font="14px"
+                  size="6.5rem"
+                  background="#E1BEA5"
+                  color="#070707"
+                  border="#f5f5dc"
+                  hoverb="white"
+                  hoverc="#070707"
+                  hoverborder="#070707"
+                />
+              </SLink>
+            </Li>
+            <Li>
+              <SLink href="/register" hcolor="black">
+                Signup
+              </SLink>
+            </Li>
+          </Ull> :
+          <Ull>
+            <Link href={'/cart'}>
+              <ProfileIcon src={'/cart.png'} width={256} height={256}>
+              </ProfileIcon>
+            </Link>
+            <Link href={'/profile'}>
+              <ProfileIcon src={'/profile.png'} width={256} height={256}>
+              </ProfileIcon>
+            </Link>
+          </Ull>
+        }
+        {/* <Ull>
           <Li>
             <SLink href="/login">
               <Button
@@ -131,88 +189,14 @@ const Navbar = () => {
               Signup
             </SLink>
           </Li>
-        </Ull>
+        </Ull> */}
       </InsideNav>
       <InsideNav width='90%'>
-      <Link href="#link">
-        <div>Logo</div>
-      </Link>
-      
-      <Ul>
-        <Li>
-          <Button
-            font="12px"
-            size="6rem"
-            id="child"
-            name="Home"
-            color="white"
-            border="#f5f5dc"
-            background="black"
-            hoverc="black"
-            hoverb="white"
-            hoverborder="black"
-          />
-        </Li>
-        <Li>
-          <Button
-            font="12px"
-            size="6rem"
-            id="child"
-            name="About"
-            color="white"
-            border="#f5f5dc"
-            background="black"
-            hoverc="black"
-            hoverb="white"
-            hoverborder="black"
-          />
-        </Li>
-        <Li>
-          <Button
-            font="12px"
-            size="6rem"
-            id="child"
-            name="Contact"
-            color="white"
-            border="#f5f5dc"
-            background="black"
-            hoverc="black"
-            hoverb="white"
-            hoverborder="black"
-          />
-        </Li>
-        <Li>
-          <Button
-            font="12px"
-            size="6rem"
-            id="child"
-            name="Cosmetic"
-            color="white"
-            border="#f5f5dc"
-            background="black"
-            hoverc="black"
-            hoverb="white"
-            hoverborder="black"
-          />
-        </Li>
-      </Ul>
-      
-      <MenuIcon onClick={toggleSideMenu}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-          <path d="M0 0h24v24H0z" fill="none" />
-          <path
-            fill="#070707"
-            d="M3 18h18v-2H3v2zM3 13h18v-2H3v2zM3 6v2h18V6H3z"
-          />
-        </svg>
-      </MenuIcon>
-      <SideMenu style={{ width: isSideMenuOpen ? '100%' : '0' }}>
-        <CloseIcon onClick={toggleSideMenu}>&times;</CloseIcon>
-        <SideMenuContent>
-          <Link href="#link">
-            <div>Logo</div>
-          </Link>
-          <UlMenu>
+        <Link href="#link">
+          <div>Logo</div>
+        </Link>
+
+        <Ul>
           <Li>
             <Button
               font="12px"
@@ -269,10 +253,84 @@ const Navbar = () => {
               hoverborder="black"
             />
           </Li>
-          </UlMenu>
-          
-        </SideMenuContent>
-      </SideMenu>
+        </Ul>
+
+        <MenuIcon onClick={toggleSideMenu}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path
+              fill="#070707"
+              d="M3 18h18v-2H3v2zM3 13h18v-2H3v2zM3 6v2h18V6H3z"
+            />
+          </svg>
+        </MenuIcon>
+        <SideMenu style={{ width: isSideMenuOpen ? '100%' : '0' }}>
+          <CloseIcon onClick={toggleSideMenu}>&times;</CloseIcon>
+          <SideMenuContent>
+            <Link href="#link">
+              <div>Logo</div>
+            </Link>
+            <UlMenu>
+              <Li>
+                <Button
+                  font="12px"
+                  size="6rem"
+                  id="child"
+                  name="Home"
+                  color="white"
+                  border="#f5f5dc"
+                  background="black"
+                  hoverc="black"
+                  hoverb="white"
+                  hoverborder="black"
+                />
+              </Li>
+              <Li>
+                <Button
+                  font="12px"
+                  size="6rem"
+                  id="child"
+                  name="About"
+                  color="white"
+                  border="#f5f5dc"
+                  background="black"
+                  hoverc="black"
+                  hoverb="white"
+                  hoverborder="black"
+                />
+              </Li>
+              <Li>
+                <Button
+                  font="12px"
+                  size="6rem"
+                  id="child"
+                  name="Contact"
+                  color="white"
+                  border="#f5f5dc"
+                  background="black"
+                  hoverc="black"
+                  hoverb="white"
+                  hoverborder="black"
+                />
+              </Li>
+              <Li>
+                <Button
+                  font="12px"
+                  size="6rem"
+                  id="child"
+                  name="Cosmetic"
+                  color="white"
+                  border="#f5f5dc"
+                  background="black"
+                  hoverc="black"
+                  hoverb="white"
+                  hoverborder="black"
+                />
+              </Li>
+            </UlMenu>
+
+          </SideMenuContent>
+        </SideMenu>
       </InsideNav>
     </Nav>
   );

@@ -3,9 +3,10 @@ import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 
 const SlideContent = styled.div`
-    height: auto;
     width: 100%;
     background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
 `
 
 const slideAnimation = keyframes`
@@ -70,9 +71,7 @@ const NavButton = styled.button`
 `;
 
 const Container = styled.div`
-  display: flex;
-  justify-content: center:
-  align-items: center;
+  width: 100%;
 `
 
 const ProductNavbar = ({ comments}) => {

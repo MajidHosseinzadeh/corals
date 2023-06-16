@@ -37,7 +37,7 @@ const ProductImage = styled.img`
 `;
 
 export const ProductPrice = styled.span`
-  margin-top: 0.5rem;
+  margin-top: 1rem;
   font-size: 1rem;
   font-weight: bold;
   color: white;

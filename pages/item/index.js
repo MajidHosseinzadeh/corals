@@ -4,6 +4,8 @@ import { InputContainer, InputField } from '@/components/common/Input'
 import { ProductPrice } from '@/components/uncommon/profile_components/Orders';
 import { getLocalStorageItem, setLocalStorageItem } from '@/components/common/LocalStorage';
 import Link from 'next/link';
+import { devices } from '@/components/constants/devices';
+import { Typography } from '@/components/common/Typography';
 
 export const SButton = styled.button`
     @import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@200&display=swap');
@@ -56,13 +58,29 @@ const ContainerDiv = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 30%;
+  margin-top: 15%;
+  @media ${devices.lg} {
+    margin-top: 20%;
+  }
+  @media ${devices.md} {
+    margin-top: 30%;
+  }
+  @media ${devices.sm} {
+    margin-top: 40%;
+  }
+  @media ${devices.xs} {
+    margin-top: 60%;
+  }
 `
 
 const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  @media ${devices.lg} {
+    
+  }
+
 `;
 
 const ProductImage = styled.img`
@@ -135,25 +153,18 @@ const SearchPage = ({ prods }) => {
             <Container>
                 {prods
                     .map((item) => (
-                        <Link href={`/item/${item.slug}`} key={item.url}>
+                        <Link href={`/item/${item.title}`} key={item.url}>
                             <Item>
                                 <ProductImage alt='alt' src={'/footer.jpg'} />
-                                <ProductPrice>{item.price}</ProductPrice>
+                                <ProductPrice>{item.title}</ProductPrice>
+                                <ProductPrice>{"$"+item.price}</ProductPrice>
+
                             </Item>
                         </Link>
                     ))}
-
             </Container>
         </ContainerDiv>
     );
 };
 
-// {prods.map((item) => (
-{/* <Link href={`/item/${item.slug}`} key={item.url}>
-    <Item>
-        <ProductImage alt='alt' src={'/footer.jpg'} />
-        <ProductPrice>{item.price}</ProductPrice>
-    </Item>
-</Link> */}
-// ))}
 export default SearchPage;
