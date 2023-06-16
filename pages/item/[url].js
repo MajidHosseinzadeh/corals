@@ -169,38 +169,34 @@ export const getStaticPaths = async () => {
         //     }
     const res = await fetch('http://localhost:8000/products/');
     const data = await res.json();
-    console.log(data)
     const paths = data.map(products => {
       return {
         params: { url: products.url }
       }
     })
-  
     return {
       paths,
-      fallback: false
+      fallback: false,
     }
   }
   
   export const getStaticProps = async (context) => {
     const url = context.params.url;
-    const res = await fetch(url);
+    const res = await fetch("http://localhost:8000/products/product/majid");
     const data = await res.json();
-    console.log(data)
     return {
       props: { url: data }
     }
   }
   
-//   const Details = ({ ninja }) => {
-//     return (
-//       <div>
-//         <h1>{ ninja.name }</h1>
-//         <p>{ ninja.email }</p>
-//         <p>{ ninja.website }</p>
-//         <p>{ ninja.address.city }</p>
-//       </div>
-//     );
-//   }
+  const Details = ({ url }) => {
+    console.log(url)
+    console.log("first")
+    return (
+      <div>
+       {url}
+      </div>
+    );
+  }
   
-//   export default Details;
+  export default Details;

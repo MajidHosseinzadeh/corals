@@ -9,7 +9,6 @@ import { StrictMode } from 'react'
 const Home = () => {
   return (
     <StrictMode>
-      <Navbar />
       <Dreadlocks />
       <Cart/>
       <AnimaedScroll/>

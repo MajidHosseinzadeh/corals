@@ -1,5 +1,5 @@
 import { Typography } from '@/components/common/Typography'
-import Navbar from '@/components/rare/navbar/Navbar'
+import { devices } from '@/components/constants/devices'
 import Orders from '@/components/uncommon/profile_components/Orders'
 import Profile from '@/components/uncommon/profile_components/Profile'
 import { useRouter } from 'next/router'
@@ -8,15 +8,17 @@ import styled from 'styled-components'
 
 const ProfileContainer = styled.div`
     width: 100%;
-
+    margin-top: 20%;
 `
 const ProfilePage = styled.div`
     display: flex;
     flex-direction: row;
-    position: absolute;
-    left: 0;
-    right: 0;
     margin: 100px 0px 0px 0px;
+    @media ${devices.lg} {
+        flex-direction: column;
+        align-items: center;
+        margin: 30px 0px 0px 0px;
+    }
 `
 
 
@@ -43,7 +45,6 @@ const index = () => {
 
     return (
         <ProfileContainer>
-            <Navbar />
             <Typography>Profile</Typography>
             <ProfilePage>
                 <Profile />

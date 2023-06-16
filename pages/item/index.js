@@ -56,6 +56,7 @@ const ContainerDiv = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-top: 30%;
 `
 
 const Container = styled.div`
@@ -81,9 +82,11 @@ export const getStaticProps = async () => {
     try {
         const res = await fetch("http://localhost:8000/products/");
         const data = await res.json();
+        const resp = await fetch('http://localhost:8000/products/');
+        const dataa = await resp.json();
         return {
             props: {
-                prods: data,
+                prods: dataa,
             },
         };
     } catch (error) {
@@ -95,10 +98,11 @@ export const getStaticProps = async () => {
         };
     }
 
+
 }
 
 const SearchPage = ({ prods }) => {
-
+    console.log(prods)
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredItems, setFilteredItems] = useState([]);
     const [items, setItems] = useState([]);
@@ -114,8 +118,6 @@ const SearchPage = ({ prods }) => {
             item.title.includes(searchTerm)
         }))
         setFilteredItems(filtered);
-        console.log(filteredItems);
-        console.log(searchTerm);
     };
 
     return (
