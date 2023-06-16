@@ -158,7 +158,6 @@ const SearchPage = ({ prods }) => {
                                 <ProductImage alt='alt' src={'/footer.jpg'} />
                                 <ProductPrice>{item.title}</ProductPrice>
                                 <ProductPrice>{"$"+item.price}</ProductPrice>
-
                             </Item>
                         </Link>
                     ))}

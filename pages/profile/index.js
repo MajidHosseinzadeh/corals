@@ -21,8 +21,29 @@ const ProfilePage = styled.div`
     }
 `
 
+export const getStaticProps = async () => {
+    try {
+        const res = await fetch("http://localhost:8000/orders/");
+        const data = await res.json();
+        return {
+            props: {
+                orders: data,
+            },
+        };
+    } catch (error) {
+        console.error(error);
+        return {
+            props: {
+                orders: [],
+            },
+        };
+    }
+  
+  
+  }
 
-const index = () => {
+const index = ({orders}) => {
+    console.log(orders)
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(true);
 
@@ -48,7 +69,7 @@ const index = () => {
             <Typography>Profile</Typography>
             <ProfilePage>
                 <Profile />
-                <Orders />
+                <Orders orders={orders}/>
             </ProfilePage>
         </ProfileContainer>
     )

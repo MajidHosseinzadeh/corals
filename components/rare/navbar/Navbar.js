@@ -159,11 +159,11 @@ const Navbar = () => {
           </Ull> :
           <Ull>
             <Link href={'/cart'}>
-              <ProfileIcon src={'/cart.png'} width={256} height={256}>
+              <ProfileIcon alt={'cart'} src={'/cart.png'} width={256} height={256}>
               </ProfileIcon>
             </Link>
             <Link href={'/profile'}>
-              <ProfileIcon src={'/profile.png'} width={256} height={256}>
+              <ProfileIcon alt={'profile'} src={'/profile.png'} width={256} height={256}>
               </ProfileIcon>
             </Link>
           </Ull>

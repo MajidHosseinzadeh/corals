@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { BaseInfoFlex } from './Profile'
 import { Typography } from '@/components/common/Typography'
+import Cart from '@/components/rare/CardItems'
 
 const MyOrders = styled.div`
   display: flex;
@@ -46,18 +47,18 @@ export const ProductPrice = styled.span`
 
 const items = [
   [
-  { id: 1, src: "/footer.jpg", price: "8$", },
-  { id: 2, src: "/footer.jpg", price: "8$", },
-  { id: 3, src: "/footer.jpg", price: "8$", },
-  { id: 4, src: "/footer.jpg", price: "8$", },
-  { id: 5, src: "/footer.jpg", price: "8$", },
-  { id: 6, src: "/footer.jpg", price: "8$", },
-  { id: 7, src: "/footer.jpg", price: "8$", },
-  { id: 8, src: "/footer.jpg", price: "8$", },
-  { id: 9, src: "/footer.jpg", price: "8$", },
-  { id: 10, src: "/footer.jpg", price: "8$", },
-  { id: 11, src: "/footer.jpg", price: "8$", },
-  { id: 12, src: "/footer.jpg", price: "8$", },
+    { id: 1, src: "/footer.jpg", price: "8$", },
+    { id: 2, src: "/footer.jpg", price: "8$", },
+    { id: 3, src: "/footer.jpg", price: "8$", },
+    { id: 4, src: "/footer.jpg", price: "8$", },
+    { id: 5, src: "/footer.jpg", price: "8$", },
+    { id: 6, src: "/footer.jpg", price: "8$", },
+    { id: 7, src: "/footer.jpg", price: "8$", },
+    { id: 8, src: "/footer.jpg", price: "8$", },
+    { id: 9, src: "/footer.jpg", price: "8$", },
+    { id: 10, src: "/footer.jpg", price: "8$", },
+    { id: 11, src: "/footer.jpg", price: "8$", },
+    { id: 12, src: "/footer.jpg", price: "8$", },
   ],
   [
     { id: 1, src: "/footer.jpg", price: '9$', },
@@ -77,40 +78,22 @@ const items = [
 ];
 
 
-const Orders = () => {
+
+const Orders = ({orders}) => {
+  console.log(orders)
+
   return (
     <BaseInfoFlex border='3px white solid' width='70%'>
       <Typography margin='20px 0'>Orders</Typography>
       <MyOrders>
-        <CartContainer>
-        {items[0].map((item) => (
-            <ProductCard key={item.id}>
-              <ProductImage alt="alt" src={item.src}/>
-              <ProductPrice>{item.price}</ProductPrice>
-            </ProductCard>
-          ))}
-          
-        </CartContainer>
-        <CartContainer>
-        {items[1].map((item) => (
-            <ProductCard key={item.id}>
-              <ProductImage alt="alt" src={item.src}/>
-              <ProductPrice>{item.price}</ProductPrice>
-            </ProductCard>
-          ))}
-          
-        </CartContainer>
-        <CartContainer>
-        {items[1].map((item) => (
-            <ProductCard key={item.id}>
-              <ProductImage alt="alt" src={item.src}/>
-              <ProductPrice>{item.price}</ProductPrice>
-            </ProductCard>
-          ))}
-          
-        </CartContainer>
+          {orders.map((order) => (
+            order.items.map((items) => {
+              
+            })
+          )
+          )}
       </MyOrders>
-    </BaseInfoFlex>
+    </BaseInfoFlex >
   )
 }
 

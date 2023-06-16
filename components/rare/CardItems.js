@@ -2,6 +2,7 @@ import Image from 'next/image';
 import React from 'react';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import styled from 'styled-components';
+import { BaseInfoFlex } from '../uncommon/profile_components/Profile';
 
 const CartContainer = styled.div`
   display: flex;
@@ -83,6 +84,8 @@ const items = [
 
 
 ];
+
+
 const Cart = () => {
   const scrollRight = () => {
     const container = document.getElementById('cart-container');

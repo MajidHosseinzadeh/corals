@@ -135,23 +135,19 @@ function ProductForm() {
         }
     };
 
-    // Define a function to handle the form submission event
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        // Do something with the form data here
         console.log({ name, price, image });
     };
 
-    // Define a function to handle the slide change events
     const showSlide = (n) => {
-        // Validate the slide index
         if (n < 0) {
-            n = slideIndex - 1; // Go to previous slide
+            n = slideIndex - 1; 
         } else if (n > slideIndex + 1) {
-            n = slideIndex + 1; // Go to next slide
+            n = slideIndex + 1; 
         } else if (n > slides.length - 1) {
-            n = slides.length - 1; // Stay at last slide
+            n = slides.length - 1;
         }
 
         setSlideIndex(n);
